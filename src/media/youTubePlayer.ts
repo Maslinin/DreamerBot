@@ -74,7 +74,7 @@ export default class YouTubePlayer implements IMediaPlayer {
 
         const embed = new EmbedBuilder();
         
-        let queue = this._distube.getQueue(msg);
+        const queue = this._distube.getQueue(msg);
         if (queue) {
             await queue.skip();
             embed.setDescription(this._locale.skipCommandOutputWhenTrackSkipped);

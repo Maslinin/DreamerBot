@@ -3,7 +3,7 @@ import ICommand, { commands } from "./command";
 import { Message } from "discord.js";
 import globalContext from "../globalContext";
 
-export class commandFactory {
+export class CommandFactory {
     private readonly _commandPrefix: string;
     private readonly _commands: ICommand[];
 
@@ -22,5 +22,5 @@ export class commandFactory {
     }
 }
 
-const cmdFactory: commandFactory = new commandFactory();
+const cmdFactory: CommandFactory = new CommandFactory();
 export default cmdFactory;
