@@ -1,6 +1,6 @@
 import { Events } from "discord.js";
 import { isCommand } from "./commands/command";
-import cmdFactory from "./commands/CommandFactory";
+import cmdFactory from "./commands/commandFactory";
 import { botToken } from "./config.json"
 import globalContext from "./globalContext";
 
