@@ -38,7 +38,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: $MY_TOKEN
+          password: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Extract Docker metadata
         id: meta
@@ -58,6 +58,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Sign the published Docker image
+        if: ${{ false }}
         if: ${{ github.event_name != 'pull_request' }}
         env:
           COSIGN_EXPERIMENTAL: "true"
