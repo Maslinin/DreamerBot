@@ -1,8 +1,10 @@
-import { Client, GatewayIntentBits, Locale } from "discord.js";
 import ConfigData from "./config.json";
 import getLocale from "./locales/localeFactory";
-import { IMediaPlayer } from "./media/mediaPlayer";
 import YouTubePlayer from "./media/youTubePlayer";
+
+import { Client, GatewayIntentBits, Locale } from "discord.js";
+import { IMediaPlayer } from "./media/mediaPlayer";
+import Path from "node:path";
 
 export interface IGlobalContext {
     get discordClient(): Client;
@@ -11,14 +13,13 @@ export interface IGlobalContext {
     get locale(): any;
 }
 
-export class DefaultGlobalContext implements IGlobalContext {
+class DefaultGlobalContext implements IGlobalContext {
     private readonly _discordClient: Client;
     private readonly _mediaPlayer: IMediaPlayer;
     private readonly _commandPrefix: string;
-    private readonly _locale: any; 
+    private readonly _locale: any;
 
     constructor() {
-        this._commandPrefix = ConfigData.commandPrefix;
         this._locale = getLocale(ConfigData.locale as Locale);
         this._discordClient = new Client({
             intents: [
@@ -29,6 +30,7 @@ export class DefaultGlobalContext implements IGlobalContext {
             ]
         });
         this._mediaPlayer = new YouTubePlayer(this._discordClient, this._locale);
+        this._commandPrefix = ConfigData.commandPrefix;
     }
 
     get discordClient(): Client {
@@ -46,6 +48,7 @@ export class DefaultGlobalContext implements IGlobalContext {
     get locale(): any {
         return this._locale;
     }
+
 }
 
 const globalContext: IGlobalContext = new DefaultGlobalContext();

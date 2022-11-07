@@ -15,11 +15,10 @@ export default class YouTubePlayer implements IMediaPlayer {
             leaveOnStop: true,
             savePreviousSongs: false
         })
-
         .on(Events.ADD_SONG, async (queue, song) => {
             const embed = new EmbedBuilder()
             .setTitle(this._locale.textOutputWhenAddingNewSongToQueue)
-            .setDescription(`${song.name!} - ${song.formattedDuration}`);
+            .setDescription(`${song.name!} | ${song.formattedDuration}`);
 
             await queue.textChannel?.send( { embeds: [embed] });
         })
@@ -31,13 +30,14 @@ export default class YouTubePlayer implements IMediaPlayer {
         .on(Events.PLAY_SONG, async (queue, song) => {
             const embed = new EmbedBuilder()
             .setTitle(this._locale.textOutputWhenSongStartedPlaying)
-            .setDescription(`${song.name!} - ${song.formattedDuration}`);
+            .setDescription(`${song.name!} | ${song.formattedDuration}`);
 
             await queue.textChannel?.send( { embeds: [embed] });
         })
         .on(Events.FINISH_SONG, async (queue, song) => {
             const embed = new EmbedBuilder()
-            .setDescription(`${song.name!}- ${this._locale.textOutputWhenSongStoppedPlaying}`);
+            .setTitle(this._locale.textOutputWhenSongStoppedPlaying)
+            .setDescription(song.name!);
 
             await queue.textChannel?.send( { embeds: [embed] });
         })
@@ -76,6 +76,11 @@ export default class YouTubePlayer implements IMediaPlayer {
         
         const queue = this._distube.getQueue(msg);
         if (queue) {
+            if (queue.songs.length === 1) {
+                await this.stop(msg);
+                return;
+            }
+
             await queue.skip();
             embed.setDescription(this._locale.skipCommandOutputWhenTrackSkipped);
         }
