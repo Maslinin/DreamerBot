@@ -1,6 +1,6 @@
 import { Message } from "discord.js";
 
-export interface IMediaPlayer {
+export default interface IMediaPlayer {
     play(msg: Message): Promise<void>;
     skip(msg: Message): Promise<void>;
     queue(msg: Message): Promise<void>;

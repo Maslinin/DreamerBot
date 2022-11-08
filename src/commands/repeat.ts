@@ -1,8 +1,8 @@
-import { Message } from "discord.js";
-import { IMediaPlayer } from "../media/mediaPlayer";
-
+import { ICommand } from "./command";
 import globalContext from "../globalContext";
-import ICommand from "./command";
+import IMediaPlayer from "../media/mediaPlayer";
+
+import { Message } from "discord.js";
 
 export default class Repeat implements ICommand {
     private readonly _name: string = this.constructor.name.toLowerCase();;

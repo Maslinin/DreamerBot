@@ -2,8 +2,8 @@ import ConfigData from "./config.json";
 import getLocale from "./locales/localeFactory";
 import YouTubePlayer from "./media/youTubePlayer";
 
+import IMediaPlayer from "./media/mediaPlayer";
 import { Client, GatewayIntentBits, Locale } from "discord.js";
-import { IMediaPlayer } from "./media/mediaPlayer";
 
 export interface IGlobalContext {
     get discordClient(): Client;

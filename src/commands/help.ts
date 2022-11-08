@@ -1,6 +1,7 @@
-import { EmbedBuilder, Message } from "discord.js";
+import { ICommand, commands } from "./command";
 import globalContext from "../globalContext";
-import ICommand, { commands } from "./command";
+
+import { EmbedBuilder, Message } from "discord.js";
 
 export default class Help implements ICommand {
     private readonly _name: string = this.constructor.name.toLowerCase();;
@@ -31,10 +32,9 @@ export default class Help implements ICommand {
         
         for (const cmd of commands) {
             embed.addFields( {
-                 name: `${globalContext.commandPrefix}${cmd.name}`, 
-                 value: `${cmd.description}`
-                }
-            );
+                name: `${globalContext.commandPrefix}${cmd.name}`, 
+                value: `${cmd.description}`
+            });
         }
         
         await msg.channel.send( { embeds: [embed] });

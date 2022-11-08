@@ -1,7 +1,7 @@
 import { Client, EmbedBuilder, GuildTextBasedChannel, Message } from "discord.js";
 import { DisTube, Events, RepeatMode } from "distube";
 import { getCommandParams } from "../commands/command";
-import { IMediaPlayer } from "./mediaPlayer";
+import IMediaPlayer from "./mediaPlayer";
 
 export default class YouTubePlayer implements IMediaPlayer {
     private readonly _distube: DisTube;
@@ -204,12 +204,12 @@ export default class YouTubePlayer implements IMediaPlayer {
         await msg.channel.send( { embeds: [embed] });
     }
 
-    private async userInChannel(msg: Message<boolean>): Promise<boolean> {
+    private userInChannel(msg: Message<boolean>): boolean {
         const embed = new EmbedBuilder();
 
         if (!msg.member?.voice.channel) {
             embed.setDescription(this._locale.textOutputIfUserIsNotInVoiceChannel);
-            await msg.channel.send( { embeds: [embed] });
+            msg.channel.send( { embeds: [embed] });
 
             return false;
         }

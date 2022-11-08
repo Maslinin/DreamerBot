@@ -7,10 +7,10 @@ import Skip from "./skip";
 import Stop from "./stop";
 import Repeat from "./repeat";
 
-import { Message } from "discord.js";
 import globalContext from "../globalContext";
+import { Message } from "discord.js";
 
-export default interface ICommand {
+export interface ICommand {
     get name(): string;
     get description(): string;
     execute(obj: any): Promise<void>;
@@ -34,14 +34,14 @@ export function isCommand(msg: Message): boolean {
     if (cmd.length > 1) {
         return cmd.startsWith(globalContext.commandPrefix);
     }
-    else {
-        return false;
-    }
+    
+    return false;
 }
 
 export function getCommandParams(msg: Message): string[] | null {
     const params = msg.content.split(' ');
     params.shift();
+    params.map(x => x.trim());
     
     return params.length > 0 ? params : null;
 }

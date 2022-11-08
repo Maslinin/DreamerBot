@@ -1,6 +1,7 @@
-import { Message, TextChannel } from "discord.js";
+import { ICommand, getCommandParams } from "./command";
 import globalContext from "../globalContext";
-import ICommand, { getCommandParams } from "./command";
+
+import { Message, TextChannel } from "discord.js";
 
 export default class Clear implements ICommand {
     private readonly _name: string = this.constructor.name.toLowerCase();
