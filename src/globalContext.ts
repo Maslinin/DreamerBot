@@ -4,7 +4,6 @@ import YouTubePlayer from "./media/youTubePlayer";
 
 import { Client, GatewayIntentBits, Locale } from "discord.js";
 import { IMediaPlayer } from "./media/mediaPlayer";
-import Path from "node:path";
 
 export interface IGlobalContext {
     get discordClient(): Client;

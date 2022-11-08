@@ -6,4 +6,5 @@ export interface IMediaPlayer {
     queue(msg: Message): Promise<void>;
     pause(msg: Message): Promise<void>;
     stop(msg: Message): Promise<void>;
+    repeat(msg: Message): Promise<void>;
 }

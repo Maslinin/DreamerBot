@@ -7,6 +7,8 @@
     "stopCommandDescription": "Stops playback of all tracks and clears the queue.",
     "pauseCommandDescription": "Pauses the track or continues playing it.",
     "skipCommandDescription": "Skips the current track.",
+    "queueCommandDescription": "Displays a list of tracks in the playback queue.",
+    "repeatCommandDescription": "Puts the current track on repeat or removes the track from repetition if the track is already repeating.",
     "helpCommandDescription": "Displays a list of available commands and their description.",
     "clearCommandDescription": "Deletes the specified number of messages in the channel.",
     "helpCommandOutputTitle": "Command List",
@@ -19,8 +21,10 @@
     "pauseCommandOutputifTrackUnpaused": ":white_check_mark: The track has been paused, playback continues.",
     "skipCommandOutputWhenTrackSkipped": ":white_check_mark: Track skipped.",
     "queueCommandOutputForFirstTrack": "Playing now:",
+    "repeatCommandOutputWhenTrackIsSetToRepeat": "",
+    "repeatCommandOutputWhenTrackIsRemovedFromRepetition": "",
     "textOutputWhenTrackSearchFails": "❌ No search results found",
     "textOutputWhenAddingNewSongToQueue": "A new song has been added to the queue:",
     "textOutputWhenSongStartedPlaying": "Now playing:",
-    "textOutputWhenSongStoppedPlaying": "Playback is complete."
+    "textOutputWhenSongStoppedPlaying": "Playback is complete:"
 }

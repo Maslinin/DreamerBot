@@ -5,6 +5,7 @@ import Play from "./play";
 import Queue from "./queue";
 import Skip from "./skip";
 import Stop from "./stop";
+import Repeat from "./repeat";
 
 import { Message } from "discord.js";
 import globalContext from "../globalContext";
@@ -22,6 +23,7 @@ export const commands: ICommand[] = [
     new Pause(),
     new Skip(),
     new Queue(),
+    new Repeat(),
     new Clear()
 ]
 .sort((x, y) => x.name.localeCompare(y.name));
@@ -38,7 +40,7 @@ export function isCommand(msg: Message): boolean {
 }
 
 export function getCommandParams(msg: Message): string[] | null {
-    let params = msg.content.split(' ');
+    const params = msg.content.split(' ');
     params.shift();
     
     return params.length > 0 ? params : null;

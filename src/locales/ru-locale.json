@@ -8,6 +8,7 @@
     "pauseCommandDescription": "Ставит трек на паузу или продолжает его воспроизведение.",
     "skipCommandDescription": "Пропускает текущий трек.",
     "queueCommandDescription": "Выводит список треков в очереди на воспроизведение.",
+    "repeatCommandDescription": "Ставит текущий трек на повторение или снимает трек с повторения, если трек уже повторяется.",
     "helpCommandDescription": "Выводит список доступных команд и их описание.",
     "clearCommandDescription": "Удаляет указанное количество сообщений в канале.",
     "helpCommandOutputTitle": "Список команд",
@@ -20,8 +21,10 @@
     "pauseCommandOutputIfTrackUnpaused": ":white_check_mark: Трек снят с паузы, воспроизведение продолжено.",
     "skipCommandOutputWhenTrackSkipped": ":white_check_mark: Трек пропущен.",
     "queueCommandOutputForFirstTrack": "Сейчас играет:",
+    "repeatCommandOutputWhenTrackIsSetToRepeat": "Трек поставлен на повторение.",
+    "repeatCommandOutputWhenTrackIsRemovedFromRepetition": "Трек снят с повторения.",
     "textOutputWhenTrackSearchFails": "❌ Не найдено результатов по запросу",
     "textOutputWhenAddingNewSongToQueue": "В очередь добавлена новая песня:",
     "textOutputWhenSongStartedPlaying": "Сейчас играет:",
-    "textOutputWhenSongStoppedPlaying": "Воспроизведение завершено."
+    "textOutputWhenSongStoppedPlaying": "Воспроизведение завершено:"
 }

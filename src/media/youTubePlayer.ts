@@ -1,5 +1,5 @@
 import { Client, EmbedBuilder, GuildTextBasedChannel, Message } from "discord.js";
-import { DisTube, Events } from "distube";
+import { DisTube, Events, RepeatMode } from "distube";
 import { getCommandParams } from "../commands/command";
 import { IMediaPlayer } from "./mediaPlayer";
 
@@ -8,7 +8,7 @@ export default class YouTubePlayer implements IMediaPlayer {
     private readonly _locale: any;
 
     private readonly _searchSongs: number = 5;
-    private readonly _emptyColldownInSec = 5;
+    private readonly _emptyColldownInSec: number = 5;
 
     constructor(client: Client, locale: any) {
         this._locale = locale;
@@ -53,7 +53,7 @@ export default class YouTubePlayer implements IMediaPlayer {
         });
     }
 
-    async play(msg: Message): Promise<void> {
+    async play(msg: Message<boolean>): Promise<void> {
         if (!this.userInChannel(msg)) {
             return;
         }
@@ -84,7 +84,7 @@ export default class YouTubePlayer implements IMediaPlayer {
         }
     }
 
-    async skip(msg: Message): Promise<void> {
+    async skip(msg: Message<boolean>): Promise<void> {
         if (!this.userInChannel(msg)) {
             return;
         }
@@ -108,7 +108,7 @@ export default class YouTubePlayer implements IMediaPlayer {
         await msg.channel.send( { embeds: [embed] });
     }
 
-    async queue(msg: Message): Promise<void> {
+    async queue(msg: Message<boolean>): Promise<void> {
         if (!this.userInChannel(msg)) {
             return;
         }
@@ -135,7 +135,7 @@ export default class YouTubePlayer implements IMediaPlayer {
         await msg.channel.send( { embeds: [embed] });
     }
 
-    async pause(msg: Message): Promise<void> {
+    async pause(msg: Message<boolean>): Promise<void> {
         if (!this.userInChannel(msg)) {
             return;
         }
@@ -158,7 +158,7 @@ export default class YouTubePlayer implements IMediaPlayer {
         await msg.channel.send( { embeds: [embed] });
     }
 
-    async stop(msg: Message): Promise<void> {
+    async stop(msg: Message<boolean>): Promise<void> {
         if (!this.userInChannel(msg)) {
             return;
         }
@@ -177,7 +177,34 @@ export default class YouTubePlayer implements IMediaPlayer {
         await msg.channel.send( { embeds: [embed] });
     }
 
-    private async userInChannel(msg: Message): Promise<boolean> {
+    async repeat(msg: Message<boolean>): Promise<void> {
+        if (!this.userInChannel(msg)) {
+            return;
+        }
+
+        const embed = new EmbedBuilder();
+
+        const queue = this._distube.getQueue(msg);
+        if(queue) {
+            const playingSong = queue.songs[0];
+
+            if (queue.repeatMode === RepeatMode.DISABLED) {
+                queue.setRepeatMode(RepeatMode.SONG);
+                embed.setDescription(`${playingSong} | ${this._locale.repeatCommandOutputWhenTrackIsSetToRepeat}`);
+            }
+            else {
+                queue.setRepeatMode(RepeatMode.DISABLED);
+                embed.setDescription(`${playingSong} | ${this._locale.repeatCommandOutputWhenTrackIsRemovedFromRepetition}`);
+            }
+        }
+        else {
+            embed.setDescription(this._locale.textOutputIfThereIsNoPlayback);
+        }
+
+        await msg.channel.send( { embeds: [embed] });
+    }
+
+    private async userInChannel(msg: Message<boolean>): Promise<boolean> {
         const embed = new EmbedBuilder();
 
         if (!msg.member?.voice.channel) {
