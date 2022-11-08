@@ -7,9 +7,6 @@ WORKDIR ${WORK_FOLDER}
 COPY ["package.json", "package-lock.json", "tsconfig.json", "./"]
 COPY src ./src
 
-RUN apt-get update
-RUN apt-get install ffmpeg -y
-
 RUN npm install npm -g
 RUN npm install
 RUN npm install -g typescript

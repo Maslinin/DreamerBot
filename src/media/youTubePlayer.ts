@@ -12,7 +12,7 @@ export default class YouTubePlayer implements IMediaPlayer {
 
         this._distube = new DisTube(client, {
             searchSongs: 1,
-            leaveOnStop: false,
+            leaveOnStop: true,
             leaveOnFinish: false,
             leaveOnEmpty: false,
             savePreviousSongs: false
@@ -120,7 +120,7 @@ export default class YouTubePlayer implements IMediaPlayer {
             embed.setTitle(`${this._locale.queueCommandOutputForFirstTrack} ${firstSongName}${queue.songs.length > 1 ? ',' : '.'}`);
 
             const songs = queue.songs
-            .map((song, id) => `${id + 1}. ${song.name} - ${song.formattedDuration}`);
+            .map((song, id) => `${id + 1}. ${song.name} | ${song.formattedDuration}`);
             songs.shift();
 
             if (songs.length !== 0) {
