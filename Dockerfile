@@ -1,4 +1,3 @@
-FROM ubuntu:20.04
 FROM node:18.12
 
 ENV WORK_FOLDER='/usr/DreamerBot'

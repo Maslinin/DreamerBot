@@ -7,15 +7,19 @@ export default class YouTubePlayer implements IMediaPlayer {
     private readonly _distube: DisTube;
     private readonly _locale: any;
 
+    private readonly _searchSongs: number = 5;
+    private readonly _emptyColldownInSec = 5;
+
     constructor(client: Client, locale: any) {
         this._locale = locale;
 
         this._distube = new DisTube(client, {
-            searchSongs: 1,
+            searchSongs: this._searchSongs,
+            leaveOnEmpty: true,
             leaveOnStop: true,
             leaveOnFinish: false,
-            leaveOnEmpty: false,
-            savePreviousSongs: false
+            savePreviousSongs: false,
+            emptyCooldown: this._emptyColldownInSec
         })
         .on(Events.ADD_SONG, async (queue, song) => {
             const embed = new EmbedBuilder()

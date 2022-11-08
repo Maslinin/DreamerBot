@@ -2,3 +2,17 @@
 
 # DreamerBot
 Discord bot for real dreamers.
+
+## Build and Deploy of a bot in a Docker Container
+
+### Build
+To build a docker image, enter the following command from the command line interface, while being in the root folder of the project:
+```
+docker build -t dreamerbot .
+```
+
+### Deploy
+To deploy an image in a Docker container, type the following command:
+```
+docker run -d --name dreamerbot dreamerbot
+```
