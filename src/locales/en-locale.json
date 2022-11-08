@@ -2,6 +2,7 @@
     "commandDoesNotExistMessage": "❌ The command you entered does not exist. Use the help command to view the list of available commands.",
     "textOutputIfUserIsNotInVoiceChannel": "❌ To execute this command, you need to be in the voice channel.",
     "textOutputIfThereIsNoPlayback": "❌ Music is not playing now!",
+    "textOutputIfUserIsNotInSameVoiceChannelWithBot": "❌ You must be in the same voice channel as the bot.",
     "playCommandDescription": "Plays a track or puts a track in a queue if another track is already being played.",
     "stopCommandDescription": "Stops playback of all tracks and clears the queue.",
     "pauseCommandDescription": "Pauses the track or continues playing it.",

@@ -12,7 +12,9 @@ export default class YouTubePlayer implements IMediaPlayer {
 
         this._distube = new DisTube(client, {
             searchSongs: 1,
-            leaveOnStop: true,
+            leaveOnStop: false,
+            leaveOnFinish: false,
+            leaveOnEmpty: false,
             savePreviousSongs: false
         })
         .on(Events.ADD_SONG, async (queue, song) => {
@@ -52,8 +54,20 @@ export default class YouTubePlayer implements IMediaPlayer {
             return;
         }
 
-        const params = getCommandParams(msg);
+        const queue = this._distube.getQueue(msg);
+        if (queue?.playing && !queue?.voiceChannel) {
+            queue.remove();
+        }
 
+        const embed = new EmbedBuilder();
+
+        if (queue && queue?.voice.channelId !== msg.member?.voice.channelId) {
+            embed.setDescription(this._locale.textOutputIfUserIsNotInSameVoiceChannelWithBot);
+            await msg.channel.send( { embeds: [embed] });
+            return;
+        }
+
+        const params = getCommandParams(msg);
         if (params) {
             const arg = params.join(' ');
             await this._distube.play(msg.member?.voice?.channel!, arg, {
@@ -61,8 +75,7 @@ export default class YouTubePlayer implements IMediaPlayer {
             });
         }
         else {
-            const embed = new EmbedBuilder()
-            .setDescription(this._locale.playCommandOutputIfArgDoesNotExist);
+            embed.setDescription(this._locale.playCommandOutputIfArgDoesNotExist);
             await msg.channel.send( { embeds: [embed] });
         }
     }

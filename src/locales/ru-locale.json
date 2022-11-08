@@ -2,6 +2,7 @@
     "commandDoesNotExistMessage": "❌ Введенной вами команды не существует. Используйте команду \"help\", чтобы просмотреть список доступных команд.",
     "textOutputIfUserIsNotInVoiceChannel": "❌ Для выполнения этой команды необходимо находиться в голосовом канале.",
     "textOutputIfThereIsNoPlayback": "❌ Музыка сейчас не играет!",
+    "textOutputIfUserIsNotInSameVoiceChannelWithBot": "❌ Вы должны находиться в том же голосовом канале, что и бот.",
     "playCommandDescription": "Воспроизводит трек или ставит трек в очередь, если другой трек уже воспроизводится.",
     "stopCommandDescription": "Останавливает воспроизведение всех треков и очищает очередь.",
     "pauseCommandDescription": "Ставит трек на паузу или продолжает его воспроизведение.",
