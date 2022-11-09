@@ -16,3 +16,6 @@ To deploy an image in a Docker container, type the following command:
 ```
 docker run -d --name dreamerbot dreamerbot
 ```
+
+### Build and deploy simultaneously
+Run ```Deployer.sh```: this script will delete the existing running Docker container with the bot if it exists and will re-build and deploy the Docker container.
