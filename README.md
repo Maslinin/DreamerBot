@@ -14,7 +14,7 @@ docker build -t dreamerbot .
 ### Deploy
 To deploy an image in a Docker container, type the following command:
 ```
-docker run -d --name dreamerbot dreamerbot
+docker run -d --restart=always --name dreamerbot dreamerbot
 ```
 
 ### Build and deploy simultaneously

@@ -1,5 +1,5 @@
 import { Events } from "discord.js";
-import { botToken } from "./config.json"
+import { botToken } from "./config.json";
 import { isCommand } from "./commands/command";
 import cmdFactory from "./commands/commandFactory";
 import globalContext from "./globalContext";
@@ -24,9 +24,9 @@ try {
             await msg.channel.send(globalContext.locale.commandDoesNotExistMessage);
         }
     })
-    
-    client.login(botToken);    
 }
 catch(err) {
     console.log((err as Error).stack);
 }
+
+client.login(botToken);

@@ -8,7 +8,7 @@ export default class YouTubePlayer implements IMediaPlayer {
     private readonly _locale: any;
 
     private readonly _searchSongs: number = 5;
-    private readonly _emptyColldownInSec: number = 5;
+    private readonly _emptyColldownInSec: number = 1;
 
     constructor(client: Client, locale: any) {
         this._locale = locale;
