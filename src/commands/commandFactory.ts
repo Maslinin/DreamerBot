@@ -16,7 +16,7 @@ class CommandFactory {
         const content = msg.content;
 
         const commandName = content
-        .split(/ +/)[0]
+        .split(/ +/g)[0]
         .substring(this._commandPrefix.length)
         .toLowerCase();
 
