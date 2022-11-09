@@ -194,7 +194,7 @@ export default class YouTubePlayer implements IMediaPlayer {
             }
             else {
                 queue.setRepeatMode(RepeatMode.DISABLED);
-                embed.setDescription(`${playingSong} | ${this._locale.repeatCommandOutputWhenTrackIsRemovedFromRepetition}`);
+                embed.setDescription(`${playingSong} | ${this._locale.repeatCommandOutputWhenTrackIsRemovedFromRepeat}`);
             }
         }
         else {
