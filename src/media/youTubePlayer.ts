@@ -186,7 +186,7 @@ export default class YouTubePlayer implements IMediaPlayer {
 
         const queue = this._distube.getQueue(msg);
         if(queue) {
-            const playingSong = queue.songs[0];
+            const playingSong = queue.songs[0].name;
 
             if (queue.repeatMode === RepeatMode.DISABLED) {
                 queue.setRepeatMode(RepeatMode.SONG);
