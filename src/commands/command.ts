@@ -39,9 +39,8 @@ export function isCommand(msg: Message): boolean {
 }
 
 export function getCommandParams(msg: Message): string[] | null {
-    const params = msg.content.split(' ');
+    const params = msg.content.split(/ +/);
     params.shift();
-    params.map(x => x.trim());
     
     return params.length > 0 ? params : null;
 }

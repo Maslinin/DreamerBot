@@ -16,9 +16,8 @@ class CommandFactory {
         const content = msg.content;
 
         const commandName = content
-        .split(' ')[0]
+        .split(/ +/)[0]
         .substring(this._commandPrefix.length)
-        .trim()
         .toLowerCase();
 
         return this._commands.find(x => x.name === commandName) ?? null;
