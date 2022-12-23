@@ -4,7 +4,7 @@ import globalContext from "../globalContext";
 import { EmbedBuilder, Message } from "discord.js";
 
 export default class Help implements ICommand {
-    private readonly _name: string = this.constructor.name.toLowerCase();;
+    private readonly _name: string = this.constructor.name.toLowerCase();
     private readonly _description: string;
     private readonly _locale: any;
 

@@ -1,18 +1,32 @@
-import globalContext from "./globalContext";
-import YouTubePlayer from "./media/youTubePlayer";
-import DiscordClientBuilder from "./discordClientBuilder";
+import { Events } from "discord.js";
 import { botToken } from "./config.json";
+import { isCommand } from "./commands/command";
+import cmdFactory from "./commands/commandFactory";
+import globalContext from "./globalContext";
 
-const client = new DiscordClientBuilder()
-.onCommand()
-.build();
-
-globalContext.discordClient = client;
-globalContext.mediaPlayer = new YouTubePlayer(globalContext.discordClient, globalContext.locale);
+const client = globalContext.discordClient;
 
 try {
-    globalContext.discordClient.login(botToken);
+    client.on(Events.MessageCreate || Events.MessageUpdate, async msg => {
+        if (msg.author.bot || !msg.inGuild()) {
+            return;
+        }
+        
+        if (!isCommand(msg)) {
+            return;
+        }
+    
+        let cmd = cmdFactory.getCommand(msg);
+        if (cmd) {
+            await cmd.execute(msg);
+        } 
+        else {
+            await msg.channel.send(globalContext.locale.commandDoesNotExistMessage);
+        }
+    })
 }
 catch(err) {
     console.log((err as Error).stack);
 }
+
+client.login(botToken);

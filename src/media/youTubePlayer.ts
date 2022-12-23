@@ -1,8 +1,7 @@
-import IMediaPlayer from "./mediaPlayer";
-import { getCommandParams } from "../commands/command";
-
-import { DisTube, Events, RepeatMode } from "distube";
 import { Client, EmbedBuilder, GuildTextBasedChannel, Message } from "discord.js";
+import { DisTube, Events, RepeatMode } from "distube";
+import { getCommandParams } from "../commands/command";
+import IMediaPlayer from "./mediaPlayer";
 
 export default class YouTubePlayer implements IMediaPlayer {
     private readonly _distube: DisTube;
@@ -32,7 +31,6 @@ export default class YouTubePlayer implements IMediaPlayer {
         .on(Events.SEARCH_NO_RESULT, async (msg, query) => {
             const embed = new EmbedBuilder()
             .setDescription(`${this._locale.textOutputWhenTrackSearchFails}: ${query}`);
-
             await msg.channel.send( { embeds: [embed] });
         })
         .on(Events.PLAY_SONG, async (queue, song) => {
