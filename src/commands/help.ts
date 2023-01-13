@@ -1,4 +1,5 @@
 import { ICommand, commands } from "./command";
+import { embedBorderColor } from "../constants";
 import globalContext from "../globalContext";
 
 import { EmbedBuilder, Message } from "discord.js";
@@ -28,7 +29,8 @@ export default class Help implements ICommand {
         const msg = obj as Message;
 
         const embed = new EmbedBuilder()
-        .setTitle(this._locale.helpCommandOutputTitle);
+        .setTitle(this._locale.helpCommandOutputTitle)
+        .setColor(embedBorderColor);
         
         for (const cmd of commands) {
             embed.addFields( {

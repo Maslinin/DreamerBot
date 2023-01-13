@@ -1,14 +1,15 @@
 import { Client, EmbedBuilder, GuildTextBasedChannel, Message } from "discord.js";
 import { DisTube, Events, RepeatMode } from "distube";
 import { getCommandParams } from "../commands/command";
+import { embedBorderColor } from "../constants";
 import IMediaPlayer from "./mediaPlayer";
 
 export default class YouTubePlayer implements IMediaPlayer {
-    private readonly _distube: DisTube;
-    private readonly _locale: any;
-
     private readonly _searchSongs: number = 5;
     private readonly _emptyColldownInSec: number = 1;
+
+    private readonly _distube: DisTube;
+    private readonly _locale: any;
 
     constructor(client: Client, locale: any) {
         this._locale = locale;
@@ -24,26 +25,31 @@ export default class YouTubePlayer implements IMediaPlayer {
         .on(Events.ADD_SONG, async (queue, song) => {
             const embed = new EmbedBuilder()
             .setTitle(this._locale.textOutputWhenAddingNewSongToQueue)
-            .setDescription(`${song.name!} | ${song.formattedDuration}`);
+            .setDescription(`${song.name!} | ${song.formattedDuration}`)
+            .setColor(embedBorderColor);
 
             await queue.textChannel?.send( { embeds: [embed] });
         })
         .on(Events.SEARCH_NO_RESULT, async (msg, query) => {
             const embed = new EmbedBuilder()
-            .setDescription(`${this._locale.textOutputWhenTrackSearchFails}: ${query}`);
+            .setDescription(`${this._locale.textOutputWhenTrackSearchFails}: ${query}`)
+            .setColor(embedBorderColor);
+
             await msg.channel.send( { embeds: [embed] });
         })
         .on(Events.PLAY_SONG, async (queue, song) => {
             const embed = new EmbedBuilder()
             .setTitle(this._locale.textOutputWhenSongStartedPlaying)
-            .setDescription(`${song.name!} | ${song.formattedDuration}`);
+            .setDescription(`${song.name!} | ${song.formattedDuration}`)
+            .setColor(embedBorderColor);
 
             await queue.textChannel?.send( { embeds: [embed] });
         })
         .on(Events.FINISH_SONG, async (queue, song) => {
             const embed = new EmbedBuilder()
             .setTitle(this._locale.textOutputWhenSongStoppedPlaying)
-            .setDescription(song.name!);
+            .setDescription(song.name!)
+            .setColor(embedBorderColor);
 
             await queue.textChannel?.send( { embeds: [embed] });
         })
@@ -63,10 +69,11 @@ export default class YouTubePlayer implements IMediaPlayer {
             queue.remove();
         }
 
-        const embed = new EmbedBuilder();
+        const embed = new EmbedBuilder()
+        .setColor(embedBorderColor);
 
         if (queue && queue?.voice.channelId !== msg.member?.voice.channelId) {
-            embed.setDescription(this._locale.textOutputIfUserIsNotInSameVoiceChannelWithBot);
+            embed.setDescription(this._locale.textOutputIfUserIsNotInSameVoiceChannelWithBot)
             await msg.channel.send( { embeds: [embed] });
             return;
         }
@@ -89,7 +96,8 @@ export default class YouTubePlayer implements IMediaPlayer {
             return;
         }
 
-        const embed = new EmbedBuilder();
+        const embed = new EmbedBuilder()
+        .setColor(embedBorderColor);
         
         const queue = this._distube.getQueue(msg);
         if (queue) {
@@ -113,7 +121,8 @@ export default class YouTubePlayer implements IMediaPlayer {
             return;
         }
 
-        const embed = new EmbedBuilder();
+        const embed = new EmbedBuilder()
+        .setColor(embedBorderColor);
 
         const queue = this._distube.getQueue(msg);
         if (!queue) {
@@ -140,7 +149,8 @@ export default class YouTubePlayer implements IMediaPlayer {
             return;
         }
 
-        const embed = new EmbedBuilder();
+        const embed = new EmbedBuilder()
+        .setColor(embedBorderColor);
 
         const queue = this._distube.getQueue(msg);
         if (queue?.playing) {
@@ -163,7 +173,8 @@ export default class YouTubePlayer implements IMediaPlayer {
             return;
         }
 
-        const embed = new EmbedBuilder();
+        const embed = new EmbedBuilder()
+        .setColor(embedBorderColor);
 
         const queue = this._distube.getQueue(msg);
         if (queue) {
@@ -182,7 +193,8 @@ export default class YouTubePlayer implements IMediaPlayer {
             return;
         }
 
-        const embed = new EmbedBuilder();
+        const embed = new EmbedBuilder()
+        .setColor(embedBorderColor);
 
         const queue = this._distube.getQueue(msg);
         if(queue) {
