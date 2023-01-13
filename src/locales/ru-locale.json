@@ -26,5 +26,8 @@
     "textOutputWhenTrackSearchFails": "❌ Не найдено результатов по запросу",
     "textOutputWhenAddingNewSongToQueue": "В очередь добавлена новая песня:",
     "textOutputWhenSongStartedPlaying": "Сейчас играет:",
-    "textOutputWhenSongStoppedPlaying": "Воспроизведение завершено:"
+    "textOutputWhenSongStoppedPlaying": "Воспроизведение завершено:",
+    "welcomeMessageText": "Добро пожаловать в",
+    "userJoinedServerText": "присоединился к серверу!",
+    "localBotInfoText": "На сервере есть собственный бот. Используйте ```!help``` для отображения списка допустимых команд."
 }

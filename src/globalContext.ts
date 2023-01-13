@@ -22,10 +22,11 @@ class DefaultGlobalContext implements IGlobalContext {
         this._locale = getLocale(ConfigData.locale as Locale);
         this._discordClient = new Client({
             intents: [
-                GatewayIntentBits.Guilds, 
-                GatewayIntentBits.GuildMessages,
-                GatewayIntentBits.GuildVoiceStates,
-                GatewayIntentBits.MessageContent
+                GatewayIntentBits.Guilds,
+                GatewayIntentBits.GuildMembers,
+                GatewayIntentBits.GuildMessages,                
+                GatewayIntentBits.MessageContent,
+                GatewayIntentBits.GuildVoiceStates
             ]
         });
         this._mediaPlayer = new YouTubePlayer(this._discordClient, this._locale);

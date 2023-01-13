@@ -26,5 +26,8 @@
     "textOutputWhenTrackSearchFails": "❌ No search results found",
     "textOutputWhenAddingNewSongToQueue": "A new song has been added to the queue:",
     "textOutputWhenSongStartedPlaying": "Now playing:",
-    "textOutputWhenSongStoppedPlaying": "Playback is complete:"
+    "textOutputWhenSongStoppedPlaying": "Playback is complete:",
+    "welcomeMessageText": "Welcome to the",
+    "userJoinedServerText": "joined the server!",
+    "localBotInfoText": "There is a local server bot here. Use ```!help``` to display list of valid commands."
 }
