@@ -1,5 +1,5 @@
 {
-    "commandDoesNotExistMessage": "❌ Введенной вами команды не существует. Используйте команду \"help\", чтобы просмотреть список доступных команд.",
+    "commandDoesNotExistMessage": "❌ Введенной вами команды не существует. Используйте команду ``help``, чтобы просмотреть список доступных команд.",
     "textOutputIfUserIsNotInVoiceChannel": "❌ Для выполнения этой команды необходимо находиться в голосовом канале.",
     "textOutputIfThereIsNoPlayback": "❌ Музыка сейчас не играет!",
     "textOutputIfUserIsNotInSameVoiceChannelWithBot": "❌ Вы должны находиться в том же голосовом канале, что и бот.",
@@ -29,5 +29,5 @@
     "textOutputWhenSongStoppedPlaying": "Воспроизведение завершено:",
     "welcomeMessageText": "Добро пожаловать в",
     "userJoinedServerText": "присоединился к серверу!",
-    "localBotInfoText": "На сервере есть собственный бот. Используйте ```!help``` для отображения списка допустимых команд."
+    "localBotInfoText": "На сервере есть собственный бот. Используйте ``!help`` для отображения списка допустимых команд."
 }

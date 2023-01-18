@@ -1,5 +1,5 @@
 {
-    "commandDoesNotExistMessage": "❌ The command you entered does not exist. Use the help command to view the list of available commands.",
+    "commandDoesNotExistMessage": "❌ The command you entered does not exist. Use the ``help`` command to view the list of available commands.",
     "textOutputIfUserIsNotInVoiceChannel": "❌ To execute this command, you need to be in the voice channel.",
     "textOutputIfThereIsNoPlayback": "❌ Music is not playing now!",
     "textOutputIfUserIsNotInSameVoiceChannelWithBot": "❌ You must be in the same voice channel as the bot.",
@@ -29,5 +29,5 @@
     "textOutputWhenSongStoppedPlaying": "Playback is complete:",
     "welcomeMessageText": "Welcome to the",
     "userJoinedServerText": "joined the server!",
-    "localBotInfoText": "There is a local server bot here. Use ```!help``` to display list of valid commands."
+    "localBotInfoText": "There is a local server bot here. Use ``help`` to display list of valid commands."
 }
