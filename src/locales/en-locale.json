@@ -28,6 +28,7 @@
     "textOutputWhenSongStartedPlaying": "Now playing:",
     "textOutputWhenSongStoppedPlaying": "Playback is complete:",
     "welcomeMessageText": "Welcome to the",
+    "quitMessageText": "left the server.",
     "userJoinedServerText": "joined the server!",
     "localBotInfoText": "There is a local server bot here. Use ``help`` to display list of valid commands."
 }

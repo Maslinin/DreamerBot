@@ -28,6 +28,7 @@
     "textOutputWhenSongStartedPlaying": "Сейчас играет:",
     "textOutputWhenSongStoppedPlaying": "Воспроизведение завершено:",
     "welcomeMessageText": "Добро пожаловать в",
+    "quitMessageText": "покинул сервер.",
     "userJoinedServerText": "присоединился к серверу!",
     "localBotInfoText": "На сервере есть собственный бот. Используйте ``!help`` для отображения списка допустимых команд."
 }

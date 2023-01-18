@@ -38,6 +38,10 @@ try {
 
         channel.send({ embeds: [embed] });
         channel.send(`${globalContext.locale.localBotInfoText}`);
+    })
+    .on(Events.GuildMemberRemove, async mbr => {
+        const channel = mbr.guild.channels.cache.get(`${channelIDs.welcomeChannelId}`) as TextBasedChannel;
+        channel.send(`<@${mbr.user.id}> ${globalContext.locale.quitMessageText}.`);
     });
 }
 catch(err) {
