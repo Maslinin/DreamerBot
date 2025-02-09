@@ -1,0 +1,12 @@
+{
+    "auth" : {
+        "botToken": ""
+    },
+    "register": {
+        "clientId": ""
+    },
+    "channels": {
+        "userJoined": "",
+        "userLeft": ""
+    }
+}

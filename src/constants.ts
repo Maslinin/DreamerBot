@@ -1,1 +1,43 @@
-export const embedBorderColor = '#ff0000'; //red
+import { ColorResolvable } from "discord.js";
+
+export const Path = {
+    config: './src/config/config.json',
+    commands: './src/commands'
+};
+
+export const FileExtension = {
+    modules: ['.js', '.ts']
+};
+
+export const ApiRestriction = {
+    maxMessagesToDelete: 100,
+    maxDaysForMessageDeletion: 14,
+    maxFieldsInEmbed: 25,
+    maxCharactersInEmbed: 4096,
+    options: {
+        integer: {
+            minValue: -2147483648,
+            maxValue: 2147483647
+        }
+    }
+};
+
+export const ApiResponse = {
+    componentCollector: {
+        commandCategoryResponseTime: 60000,
+        queuePageSelectorResponseTime: 60000
+    }
+}
+
+export const MusicPlayerSettings = {
+    maxTracksToSearch: 10,
+    maxTracksFromQueue: 5
+}
+
+export const Customization = {
+    color: {
+        success: 'Green',
+        playerNotification: 0x38E038,
+        failure: 'Red'
+    } as Record<string, ColorResolvable>
+};

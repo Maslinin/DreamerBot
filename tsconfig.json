@@ -1,14 +1,19 @@
 {
     "compilerOptions": {
+        "experimentalDecorators": true,
+        "moduleResolution": "Node",
         "resolveJsonModule": true,
         "esModuleInterop": true,
+        "removeComments": true,
+        "noImplicitAny": false,
+        "noImplicitThis": true,
+        "forceConsistentCasingInFileNames": true,
         "strict": true,
-        "target": "ES2020",
-        "module": "commonjs",
+        "target": "ES2022",
+        "module": "ES2022",
+        "lib": ["ES2022"],
         "rootDirs": [ "src/" ],
-        "baseUrl": "./",
         "outDir": "dist/",
         "sourceMap": true
-    },
-    "exclude": ["node_modules"]
+    }
 }

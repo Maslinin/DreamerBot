@@ -1,11 +1,15 @@
 {
   "name": "dreamerbot",
-  "version": "1.0.0",
-  "description": "Discord bot for real dreamers",
+  "version": "0.0.1",
+  "description": "A powerful Discord Bot. Music, management and more.",
   "main": "./dist/index",
+  "types": "dist/index",
   "scripts": {
-    "build": "tsc",
-    "start": "ts-node ./dist/index.js"
+    "start": "bun run ./src/index.ts",
+    "typesafe-i18n": "typesafe-i18n"
+  },
+  "engines": {
+    "node": ">=18.20.5 <20.0.0"
   },
   "repository": {
     "type": "git",
@@ -14,12 +18,17 @@
   "author": "Danil Rudin",
   "license": "MIT",
   "dependencies": {
-    "@discordjs/opus": "^0.9.0",
-    "@discordjs/voice": "^0.16.0",
-    "@distube/ytdl-core": "^4.11.17",
-    "discord.js": "^14.11.0",
-    "distube": "^4.0.5",
-    "ffmpeg-static": "^5.1.0",
-    "libsodium-wrappers": "^0.7.11"
-  }
+    "discord-player": "^7.1.0",
+    "discord-player-youtubei": "^1.4.2",
+    "discord.js": "~14.17.3",
+    "mediaplex": "^1.0.0",
+    "typesafe-i18n": "~5.26.2"
+  },
+  "devDependencies": {
+    "bun": "^1.2.1"
+  },
+  "trustedDependencies": [
+    "bun",
+    "esbuild"
+  ]
 }

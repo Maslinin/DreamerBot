@@ -1,46 +1,20 @@
-import Clear from "./clear";
-import Help from "./help";
-import Pause from "./pause";
-import Play from "./play";
-import Queue from "./queue";
-import Skip from "./skip";
-import Stop from "./stop";
-import Repeat from "./repeat";
+import { 
+    SlashCommandBuilder, 
+    AutocompleteInteraction,
+    ChatInputCommandInteraction, 
+    SlashCommandOptionsOnlyBuilder
+} from "discord.js";
 
-import globalContext from "../globalContext";
-import { Message } from "discord.js";
+export type Command = {
+    data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder;
+    execute?: (interaction: ChatInputCommandInteraction) => Promise<void>;
+    autocomplete?: (interaction: AutocompleteInteraction) => Promise<void>;
+};
 
-export interface ICommand {
-    get name(): string;
-    get description(): string;
-    execute(obj: any): Promise<void>;
-}
-
-export const commands: ICommand[] = [
-    new Help(),
-    new Play(),
-    new Stop(),
-    new Pause(),
-    new Skip(),
-    new Queue(),
-    new Repeat(),
-    new Clear()
-]
-.sort((x, y) => x.name.localeCompare(y.name));
-
-export function isCommand(msg: Message): boolean {
-    const cmd = msg.content.trim();
-
-    if (cmd.length > 1) {
-        return cmd.startsWith(globalContext.commandPrefix);
-    }
-    
-    return false;
-}
-
-export function getCommandParams(msg: Message): string[] | null {
-    const params = msg.content.split(/ +/g);
-    params.shift();
-    
-    return params.length > 0 ? params : null;
+export function isCommand(value: any): value is Command {
+    return (
+        typeof value === "object" &&
+        value !== null &&
+        !!(value as Command)?.data
+    );
 }
