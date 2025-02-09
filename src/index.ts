@@ -1,51 +1,42 @@
-import { EmbedBuilder, Events, TextBasedChannel } from "discord.js";
-import { botToken, channelIDs } from "./config.json";
-import { isCommand } from "./commands/command";
-import { embedBorderColor } from "./constants";
-import cmdFactory from "./commands/commandFactory";
-import globalContext from "./globalContext";
-
-const client = globalContext.discordClient;
+import { Client, GatewayIntentBits } from "discord.js";
+import AppConfig from "./config";
+import ModuleCommandRegister from "./commands/registers/moduleCommandRegister";
+import YouTubeMusicPlayer from "./music/youTubeMusicPlayer";
+import "./events";
+import "./extensions/discordClient"
 
 try {
-    client.on(Events.MessageCreate || Events.MessageUpdate, async msg => {
-        if (msg.author.bot || !msg.inGuild()) {
-            return;
-        }
-        
-        if (!isCommand(msg)) {
-            return;
-        }
-    
-        const cmd = cmdFactory.getCommand(msg);
-        if (cmd) {
-            await cmd.execute(msg);
-        } 
-        else {
-            await msg.channel.send(globalContext.locale.commandDoesNotExistMessage);
-        }
-    })
-    .on(Events.GuildMemberAdd, async mbr => {
-        const channel = mbr.guild.channels.cache.get(`${channelIDs.welcomeChannelId}`) as TextBasedChannel;
-        channel.send(`${globalContext.locale.welcomeMessageText} ${mbr.guild.name}!`);
+    const config = await AppConfig.get();
 
-        const embed = new EmbedBuilder;
-        embed.setAuthor( { name: `${mbr.user.tag}`, iconURL: `${mbr.user.avatarURL()}` } )
-        .setColor(embedBorderColor)
-        .setDescription(`<@${mbr.user.id}> ${globalContext.locale.userJoinedServerText}`)
-        .setFooter( { text: mbr.guild.name, iconURL: `${mbr.guild.iconURL()}` } )
-        .setThumbnail(mbr.user.avatarURL())
+    const commandRegister = new ModuleCommandRegister(config);
+    const commands = await commandRegister.Register();
 
-        channel.send({ embeds: [embed] });
-        channel.send(`${globalContext.locale.localBotInfoText}`);
-    })
-    .on(Events.GuildMemberRemove, async mbr => {
-        const channel = mbr.guild.channels.cache.get(`${channelIDs.welcomeChannelId}`) as TextBasedChannel;
-        channel.send(`<@${mbr.user.id}> ${globalContext.locale.quitMessageText}.`);
+    const client = new Client({
+        intents: [
+            GatewayIntentBits.Guilds,
+            GatewayIntentBits.GuildMembers,
+            GatewayIntentBits.GuildMessages,                
+            GatewayIntentBits.MessageContent,
+            GatewayIntentBits.GuildVoiceStates
+        ]
     });
+
+    const musicPlayer = await (new YouTubeMusicPlayer(client))
+        .loadExtractors();
+
+    client
+        .addConfig(config)
+        .addCommands(commands)
+        .addMusicPlayer(musicPlayer);
+
+    client
+        .handleReady()
+        .handleUserJoined()
+        .handleUserLeft()
+        .handleInteractionCreate()
+
+    await client.login(config.auth?.botToken);
 }
 catch(err) {
-    console.log((err as Error).stack);
+    console.log(err);
 }
-
-client.login(botToken);
