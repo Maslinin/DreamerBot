@@ -35,7 +35,7 @@ After you create your command file and start the bot, the DreamerBot's command r
 
 > You may need to restart the Discord client on your device after adding a command or changing its interface.
 
-## How to add another language?
+## How to add another localization?
 Thanks to the integration with the **typesafe-i18n** library, you can easily create your own localization for the bot.
 
 Go to the [/src/locales/i18n](https://github.com/Maslinin/DreamerBot/tree/master/src/locales/i18n) directory. Here you need to create a directory, the name of which corresponds to your localization and a file containing the corresponding localization keys. You can focus on [the current default localization](https://github.com/Maslinin/DreamerBot/tree/master/src/locales/en-US/index.ts).
