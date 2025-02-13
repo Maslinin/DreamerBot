@@ -1,10 +1,11 @@
 import { Client, Interaction } from "discord.js";
 import { GuildQueue, Player, Track } from "discord-player";
 import { IMusicPlayer, PlayerState, RepeatMode } from "./musicPlayer";
-import { trackEventHandlers } from "./handlers/discordMusicPlayerTrackEventHandler";
-import { errorEventHandlers } from "./handlers/discordMusicPlayerErrorEventHandler";
-import { getTrackThumbnail } from "../helpers/discordMusicPlayerHelper";
-import { IQueueMetadata } from "./types/discordMusicPlayerMetadataTypes";
+import { trackEventHandlers } from "./handlers/discordPlayerTrackEventHandler";
+import { errorEventHandlers } from "./handlers/discordPlayerErrorEventHandler";
+import { debugEventHandlers, debugQueueEventHandlers } from "./handlers/discordPlayerDebugEventHandler";
+import { getTrackThumbnail } from "../helpers/discordPlayerHelper";
+import { IQueueMetadata } from "./types/discordPlayerMetadataTypes";
 import { 
     getBaseGuildTextChannel, 
     getBotAsGuildMember, 
@@ -15,14 +16,15 @@ import {
     getGuildMemberLocale, 
     isUserNotInSameVoiceChannelAsBot 
 } from "../helpers/interactionHelper";
+import { MusicPlayerSettings } from "../constants";
 
-export abstract class DiscordMusicPlayer implements IMusicPlayer<Track, GuildQueue<IQueueMetadata>> {
+export abstract class DiscordPlayer implements IMusicPlayer<Track, GuildQueue<IQueueMetadata>> {
     private static readonly playerStateValues = new Set(Object.values(PlayerState));
 
     protected readonly _player: Player;
 
     constructor(client: Client) {
-        this._player = new Player(client, {});
+        this._player = new Player(client);
         this.registerHandlers();
     }
 
@@ -33,17 +35,17 @@ export abstract class DiscordMusicPlayer implements IMusicPlayer<Track, GuildQue
         return this;
     }
 
-    public async search(query: string): Promise<Track[]> {
-        const result = await this._player.search(query);
-        return result.tracks;
+    public async search(query: string): Promise<Track[] | null> {
+        const result = (await this._player.search(query)).tracks;
+        return result.length > 0 ? result : null;
     }
 
     public async play(interaction: Interaction, track: Track): Promise<PlayerState> {
         const queue = this.getCurrentQueue(getGuildId(interaction)) 
             ?? this._player.nodes.create(getGuild(interaction), {
-                leaveOnEnd: false,
-                leaveOnEmpty: true,
-                leaveOnStop: true,
+                leaveOnEnd: MusicPlayerSettings.leaveOnEnd,
+                leaveOnEmpty: MusicPlayerSettings.leaveOnEmpty,
+                leaveOnStop: MusicPlayerSettings.leaveOnStop,
                 metadata: {
                     channel: getBaseGuildTextChannel(interaction),
                     locale: getGuildMemberLocale(interaction)
@@ -58,7 +60,7 @@ export abstract class DiscordMusicPlayer implements IMusicPlayer<Track, GuildQue
             return PlayerState.PlayingInAnotherChannel;
         }
         
-        queue.addTrack(track.playlist || track);
+        queue.addTrack(track?.playlist || track);
 
         if (!queue.isPlaying()) await queue.node.play();
 
@@ -186,7 +188,7 @@ export abstract class DiscordMusicPlayer implements IMusicPlayer<Track, GuildQue
     }
 
     private isPlayerState(value: any): value is PlayerState {
-        return DiscordMusicPlayer.playerStateValues.has(value as PlayerState);
+        return DiscordPlayer.playerStateValues.has(value as PlayerState);
     }
 
     private isUserNotInSameVoiceChannelAsBot(interaction: Interaction): boolean {
@@ -204,7 +206,7 @@ export abstract class DiscordMusicPlayer implements IMusicPlayer<Track, GuildQue
         };
     }
 
-    private registerHandlers(): this {
+    private registerHandlers(): void {
         trackEventHandlers.forEach(({ event, handler }) => {
             this._player.events.on(event, async (queue: GuildQueue<IQueueMetadata>, track: Track) => await handler(queue, track));
         });
@@ -213,6 +215,12 @@ export abstract class DiscordMusicPlayer implements IMusicPlayer<Track, GuildQue
             this._player.events.on(event, async (queue: GuildQueue<IQueueMetadata>, error: Error) => await handler(queue, error));
         });
 
-        return this;
+        debugQueueEventHandlers.forEach(({ event, handler }) => {
+            this._player.events.on(event, async (queue: GuildQueue<IQueueMetadata>, message: string) => await handler(queue, message));
+        });
+
+        debugEventHandlers.forEach(({ event, handler }) => {
+            this._player.on(event, async (message: string) => await handler(message));
+        });
     }
 }

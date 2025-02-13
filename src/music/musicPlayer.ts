@@ -4,7 +4,7 @@ export interface IMusicPlayer<
     TTrack = unknown,
     TQueue = unknown
 > {
-    search(query: string): Promise<TTrack[]>;
+    search(query: string): Promise<TTrack[] | null>;
     play(interaction: Interaction, query: TTrack): Promise<PlayerState>;
     skip(interaction: Interaction): Promise<PlayerState>;
     stop(interaction: Interaction): Promise<PlayerState>;

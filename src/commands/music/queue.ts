@@ -12,10 +12,10 @@ import { Command } from "../command";
 import { getLocalization, generateLocalizations, getDefaultLocalization } from "../../helpers/localizationHelper";
 import { isUserNotInVoiceChannel, getGuildMember, getBaseGuildTextChannel, getGuildMemberLocale, getGuildId } from "../../helpers/interactionHelper";
 import { PlayerState } from "../../music/musicPlayer";
-import { DiscordMusicPlayer } from "../../music/discordMusicPlayer";
+import { DiscordPlayer } from "../../music/discordPlayer";
 import { ApiResponse, Customization, MusicPlayerSettings } from "../../constants";
 import { Track } from "discord-player";
-import { getTrackDescription, getTrackMetadataFields } from "../../helpers/discordMusicPlayerHelper";
+import { getTrackDescription, getTrackMetadataFields } from "../../helpers/discordPlayerHelper";
 import { L } from "../../localizations/i18n/i18n-node";
 
 const defaultCommandLocalization = getDefaultLocalization().music.queue;
@@ -41,10 +41,10 @@ export default {
         }
 
         let page = 0;
-        const maxTracks = MusicPlayerSettings.maxTracksFromQueue;
+        const maxTracks = MusicPlayerSettings.maxTracksToDequeue;
 
         const updateQueueMessage = async () => {
-            const musicPlayer = interaction.client.musicPlayer as DiscordMusicPlayer;
+            const musicPlayer = interaction.client.musicPlayer as DiscordPlayer;
             
             const [state, tracks, hasMoreTracks] = await musicPlayer.queue(interaction, page * maxTracks, maxTracks);
 

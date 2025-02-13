@@ -177,10 +177,10 @@ type RootTranslation = {
 			}
 			when: {
 				/**
-				 * :​x​:​ ​N​o​ ​r​e​s​u​l​t​s​ ​h​a​v​e​ ​b​e​e​n​ ​f​o​u​n​d​ ​b​y​ ​t​h​e​ ​q​u​e​r​y​ ​{​q​u​e​r​y​}​.
+				 * :​x​:​ ​N​o​ ​r​e​s​u​l​t​s​ ​h​a​v​e​ ​b​e​e​n​ ​f​o​u​n​d​ ​b​y​ ​t​h​e​ ​q​u​e​r​y​ ​'​{​q​u​e​r​y​}​.​'
 				 * @param {string} query
 				 */
-				trackSearchFailed: RequiredParams<'query'>
+				noTrackSearchResult: RequiredParams<'query'>
 			}
 		}
 		skip: {
@@ -369,11 +369,11 @@ type RootTranslation = {
 			 */
 			queueIsEmptyDescription: string
 			/**
-			 * A​n​ ​e​r​r​o​r​ ​o​c​c​u​r​r​e​d​ ​d​u​r​i​n​g​ ​p​l​a​y​b​a​c​k​.​ ​P​l​e​a​s​e​ ​t​r​y​ ​a​g​a​i​n​ ​l​a​t​e​r​.
+			 * P​l​a​y​b​a​c​k​ ​e​r​r​o​r​.​ ​P​l​e​a​s​e​ ​t​r​y​ ​a​g​a​i​n​ ​l​a​t​e​r​.
 			 */
 			playbackError: string
 			/**
-			 * A​ ​p​l​a​y​e​r​ ​e​r​r​o​r​ ​h​a​s​ ​o​c​c​u​r​r​e​d​.​ ​P​l​e​a​s​e​ ​t​r​y​ ​a​g​a​i​n​ ​l​a​t​e​r​.
+			 * P​l​a​y​e​r​ ​e​r​r​o​r​.​ ​P​l​e​a​s​e​ ​t​r​y​ ​a​g​a​i​n​ ​l​a​t​e​r​.
 			 */
 			playerError: string
 		}
@@ -566,9 +566,9 @@ export type TranslationFunctions = {
 			}
 			when: {
 				/**
-				 * :x: No results have been found by the query {query}.
+				 * :x: No results have been found by the query '{query}.'
 				 */
-				trackSearchFailed: (arg: { query: string }) => LocalizedString
+				noTrackSearchResult: (arg: { query: string }) => LocalizedString
 			}
 		}
 		skip: {
@@ -757,11 +757,11 @@ export type TranslationFunctions = {
 			 */
 			queueIsEmptyDescription: () => LocalizedString
 			/**
-			 * An error occurred during playback. Please try again later.
+			 * Playback error. Please try again later.
 			 */
 			playbackError: () => LocalizedString
 			/**
-			 * A player error has occurred. Please try again later.
+			 * Player error. Please try again later.
 			 */
 			playerError: () => LocalizedString
 		}

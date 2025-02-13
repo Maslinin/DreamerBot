@@ -3,17 +3,17 @@ import { EmbedBuilder } from "discord.js";
 import { Customization } from '../../constants';
 import { getLocalization } from "../../helpers/localizationHelper";
 import { getServerInfoFooter } from "../../helpers/formatHelper";
-import { IDiscordPlayerTrackEventHandler } from "../types/discordMusicPlayerEventTypes";
+import { IDiscordPlayerGuildQueueTrackEventHandler } from "../types/discordPlayerEventTypes";
 import { 
     getChannelByQueueMetadata, 
     getLocaleByQueueMetadata, 
     getTrackDescription, 
     getTrackMetadataFields, 
     getTrackThumbnail 
-} from "../../helpers/discordMusicPlayerHelper";
+} from "../../helpers/discordPlayerHelper";
 import L from "../../localizations/i18n/i18n-node";
 
-export const trackEventHandlers: IDiscordPlayerTrackEventHandler[] = [
+export const trackEventHandlers: IDiscordPlayerGuildQueueTrackEventHandler[] = [
     {
         event: GuildQueueEvent.AudioTrackAdd,
         handler: async (queue, track) => {

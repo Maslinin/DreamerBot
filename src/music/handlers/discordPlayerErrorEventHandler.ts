@@ -3,19 +3,19 @@ import { EmbedBuilder } from "discord.js";
 import { Customization } from "../../constants";
 import { getServerInfoFooter } from "../../helpers/formatHelper";
 import { getLocalization } from "../../helpers/localizationHelper";
-import { IDiscordPlayerErrorHandler } from "../types/discordMusicPlayerEventTypes";
-import { getChannelByQueueMetadata, getLocaleByQueueMetadata } from "../../helpers/discordMusicPlayerHelper";
+import { IDiscordPlayerGuildQueueErrorHandler } from "../types/discordPlayerEventTypes";
+import { getChannelByQueueMetadata, getLocaleByQueueMetadata } from "../../helpers/discordPlayerHelper";
 
-export const errorEventHandlers: IDiscordPlayerErrorHandler[] = [
+export const errorEventHandlers: IDiscordPlayerGuildQueueErrorHandler[] = [
     {
         event: GuildQueueEvent.PlayerError,
         handler: async (queue, error) => {
             const channel = getChannelByQueueMetadata(queue);
-            const localization = getLocalization(getLocaleByQueueMetadata(queue)).events.music;
+            const eventLocalization = getLocalization(getLocaleByQueueMetadata(queue)).events.music;
         
             const embed = new EmbedBuilder()
                 .setColor(Customization.color.failure)
-                .setTitle(localization.playbackError())
+                .setTitle(eventLocalization.playbackError())
                 .setDescription(formatErrorMessage(error))
                 .setFooter(getServerInfoFooter(channel.guild));
 
@@ -26,11 +26,11 @@ export const errorEventHandlers: IDiscordPlayerErrorHandler[] = [
         event: GuildQueueEvent.Error,
         handler: async (queue, error: Error) => {
             const channel = getChannelByQueueMetadata(queue);
-            const localization = getLocalization(getLocaleByQueueMetadata(queue)).events.music;
+            const eventLocalization = getLocalization(getLocaleByQueueMetadata(queue)).events.music;
     
             const embed = new EmbedBuilder()
                 .setColor(Customization.color.failure)
-                .setTitle(localization.playerError())
+                .setTitle(eventLocalization.playerError())
                 .setDescription(formatErrorMessage(error))
                 .setFooter(getServerInfoFooter(channel.guild));
     
@@ -40,6 +40,6 @@ export const errorEventHandlers: IDiscordPlayerErrorHandler[] = [
 ]
 
 function formatErrorMessage(error: Error): string {
-    const { name, cause } = error as { name: string; cause: string };
-    return `${name} | ${cause}`;
+    const { name, message } = error as { name: string; message: string };
+    return `${name} | ${message}`;
 }

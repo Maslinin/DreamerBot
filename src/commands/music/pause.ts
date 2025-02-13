@@ -10,10 +10,10 @@ import { Command } from "../command";
 import { getLocalization, generateLocalizations, getDefaultLocalization } from "../../helpers/localizationHelper";
 import { isUserNotInVoiceChannel, getGuildMember, getGuildId, getGuildMemberLocale, getGuild } from "../../helpers/interactionHelper";
 import { PlayerState } from "../../music/musicPlayer";
-import { DiscordMusicPlayer } from "../../music/discordMusicPlayer";
+import { DiscordPlayer } from "../../music/discordPlayer";
 import { getServerInfoFooter } from "../../helpers/formatHelper";
 import { Customization } from "../../constants";
-import { getTrackDescription, getTrackMetadataFields, getTrackThumbnail } from "../../helpers/discordMusicPlayerHelper";
+import { getTrackDescription, getTrackMetadataFields, getTrackThumbnail } from "../../helpers/discordPlayerHelper";
 import { Track } from "discord-player";
 import { L } from "../../localizations/i18n/i18n-node";
 
@@ -37,10 +37,10 @@ export default {
             return;
         }
 
-        const musicPlayer = interaction.client.musicPlayer as DiscordMusicPlayer;
+        const musicPlayer = interaction.client.musicPlayer as DiscordPlayer;
 
-        const result = await musicPlayer.pause(interaction);
-        switch(result) {
+        const state = await musicPlayer.pause(interaction);
+        switch(state) {
             case PlayerState.PlayingInAnotherChannel:
                 await interaction.followUp({
                     content: musicLocalization.when.userIsNotInSameVoiceChannelAsBot(),
@@ -54,12 +54,12 @@ export default {
                 });
                 break;
             case PlayerState.Paused:
-                await sendTrackEmbed(interaction, musicPlayer, result);
+                await sendTrackEmbed(interaction, musicPlayer, state);
 
                 await interaction.deleteReply();
                 break;
             case PlayerState.Resumed:
-                await sendTrackEmbed(interaction, musicPlayer, result);
+                await sendTrackEmbed(interaction, musicPlayer, state);
 
                 await interaction.deleteReply();
                 break;
@@ -72,7 +72,7 @@ export default {
 
 async function sendTrackEmbed(
     interaction: ChatInputCommandInteraction,
-    musicPlayer: DiscordMusicPlayer,
+    musicPlayer: DiscordPlayer,
     state: PlayerState
 ): Promise<void> {
     const guildId = getGuildId(interaction);

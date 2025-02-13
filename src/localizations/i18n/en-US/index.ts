@@ -68,7 +68,7 @@ const en_US = {
                 }
             },
             when: {
-                trackSearchFailed: ':x: No results have been found by the query {query:string}.'
+                noTrackSearchResult: ':x: No results have been found by the query \'{query:string}.\''
             }
         },
         skip: {
@@ -139,8 +139,8 @@ const en_US = {
             playbackFinished: 'Playback finished',
             queueIsEmptyTitle: 'Queue is empty',
             queueIsEmptyDescription: 'All tracks from the queue have been played.',
-            playbackError: 'An error occurred during playback. Please try again later.',
-            playerError: 'A player error has occurred. Please try again later.'
+            playbackError: 'Playback error. Please try again later.',
+            playerError: 'Player error. Please try again later.'
         },
         userJoined: {
             notificationTitle: '{userName:string}, welcome to the {serverName:string} server!',

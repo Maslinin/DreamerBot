@@ -8,7 +8,7 @@ import {
 import { Command } from "../command";
 import { getLocalization, generateLocalizations, getDefaultLocalization } from "../../helpers/localizationHelper";
 import { isUserNotInVoiceChannel, getGuildMember, getGuildMemberLocale } from "../../helpers/interactionHelper";
-import { DiscordMusicPlayer } from "../../music/discordMusicPlayer";
+import { DiscordPlayer } from "../../music/discordPlayer";
 import { PlayerState } from "../../music/musicPlayer";
 import { MusicPlayerSettings } from "../../constants";
 
@@ -31,6 +31,7 @@ export default {
         .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect),
 	async execute(interaction: ChatInputCommandInteraction) {
         const musicLocalization = getLocalization(getGuildMemberLocale(interaction)).music;
+        const commandLocalization = musicLocalization.play;
 
         const member = getGuildMember(interaction);
         if (isUserNotInVoiceChannel(member)) {
@@ -43,11 +44,19 @@ export default {
 
 		const query = interaction.options.getString(musicLocalization.play.options.query.name(), true);
 
-        const musicPlayer = interaction.client.musicPlayer as DiscordMusicPlayer;
+        const musicPlayer = interaction.client.musicPlayer as DiscordPlayer;
 
-        const song = (await musicPlayer.search(query))[0];
-        const result = await musicPlayer.play(interaction, song);
-        switch(result) {
+        const searchResult = await musicPlayer.search(query);
+        if (!searchResult) {
+            await interaction.followUp({
+                content: commandLocalization.when.noTrackSearchResult({ query }),
+                flags: MessageFlags.Ephemeral
+            });
+            return;
+        }
+
+        const state = await musicPlayer.play(interaction, searchResult[0]);
+        switch(state) {
             case PlayerState.PlayingInAnotherChannel:
                 await interaction.followUp({
                     content: musicLocalization.when.userIsNotInSameVoiceChannelAsBot(),
@@ -67,15 +76,15 @@ export default {
             return await interaction.respond([]);
         }
 
-        const musicPlayer = interaction.client.musicPlayer as DiscordMusicPlayer;
+        const musicPlayer = interaction.client.musicPlayer as DiscordPlayer;
         
-        const results = await musicPlayer.search(query);
-        if (!results) {
+        const searchResult = await musicPlayer.search(query);
+        if (!searchResult) {
             return await interaction.respond([]);
         }
 
         return await interaction.respond(
-            results
+            searchResult
                 .slice(0, MusicPlayerSettings.maxTracksToSearch)
                 .map(t => ({
                     name: formatTrackName(t),

@@ -12,7 +12,7 @@ import { isUserNotInVoiceChannel, getGuildMember, getGuildMemberLocale, getGuild
 import { PlayerState, RepeatMode } from "../../music/musicPlayer";
 import { Customization } from "../../constants";
 import { getServerInfoFooter } from "../../helpers/formatHelper";
-import { DiscordMusicPlayer } from "../../music/discordMusicPlayer";
+import { DiscordPlayer } from "../../music/discordPlayer";
 
 const defaultCommandLocalization = getDefaultLocalization().music.repeat;
 
@@ -57,10 +57,10 @@ export default {
 
 		const mode = interaction.options.getInteger(commandLocalization.options.mode.name(), true);
 
-        const musicPlayer = interaction.client.musicPlayer as DiscordMusicPlayer;
+        const musicPlayer = interaction.client.musicPlayer as DiscordPlayer;
 
-        const result = await musicPlayer.repeat(interaction, mode);
-        switch(result) {
+        const state = await musicPlayer.repeat(interaction, mode);
+        switch(state) {
             case PlayerState.PlayingInAnotherChannel:
                 await interaction.followUp({
                     content: musicLocalization.when.userIsNotInSameVoiceChannelAsBot(),
@@ -74,7 +74,7 @@ export default {
                 });
                 break;
             case PlayerState.RepeatDisabled:
-                await sendRepeatStateEmbed(interaction, musicPlayer, result);
+                await sendRepeatStateEmbed(interaction, musicPlayer, state);
 
                 await interaction.deleteReply();
                 break;
@@ -85,7 +85,7 @@ export default {
                 });
                 break;
             case PlayerState.RepeatTrackEnabled:
-                await sendRepeatStateEmbed(interaction, musicPlayer, result);
+                await sendRepeatStateEmbed(interaction, musicPlayer, state);
 
                 await interaction.deleteReply();
                 break;
@@ -96,7 +96,7 @@ export default {
                 });
                 break;
             case PlayerState.RepeatQueueEnabled:
-                await sendRepeatStateEmbed(interaction, musicPlayer, result);
+                await sendRepeatStateEmbed(interaction, musicPlayer, state);
 
                 await interaction.deleteReply();
                 break;
@@ -115,7 +115,7 @@ export default {
 
 async function sendRepeatStateEmbed(
     interaction: ChatInputCommandInteraction,
-    musicPlayer: DiscordMusicPlayer,
+    musicPlayer: DiscordPlayer,
     state: PlayerState
 ): Promise<void> {
     const guildId = getGuildId(interaction);

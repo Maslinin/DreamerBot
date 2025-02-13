@@ -1,7 +1,7 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import AppConfig from "./config";
 import ModuleCommandRegister from "./commands/registers/moduleCommandRegister";
-import YouTubeiMusicPlayer from "./music/youTubeiMusicPlayer";
+import YouTubeiPlayer from "./music/youTubeiDiscordPlayer";
 import "./events";
 import "./extensions/discordClient"
 
@@ -21,7 +21,7 @@ try {
         ]
     });
 
-    const musicPlayer = await (new YouTubeiMusicPlayer(client))
+    const musicPlayer = await (new YouTubeiPlayer(client))
         .loadExtractors();
 
     client

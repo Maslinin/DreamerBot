@@ -30,8 +30,14 @@ export const ApiResponse = {
 }
 
 export const MusicPlayerSettings = {
+    leaveOnEnd: false,
+    leaveOnEmpty: true,
+    leaveOnStop: true,
     maxTracksToSearch: 10,
-    maxTracksFromQueue: 5
+    maxTracksToDequeue: 5,
+    youTubei: {
+        highWaterMark: 1 << 25 //32 MB
+    }
 }
 
 export const Customization = {

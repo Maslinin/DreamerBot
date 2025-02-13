@@ -21,7 +21,7 @@ This project was created to provide a reliable platform for creating your own Di
 - Ffmpeg
 
 ### Legal Notice
-DreamerBot uses [discord-player-youtubei](https://www.npmjs.com/package/discord-player-youtubei) as the default implementation of the musical part of the bot. Please read [the legal notice](https://github.com/retrouser955/discord-player-youtubei/blob/HEAD/LEGAL.md) from the **discord-music-player-youtubei** developers before you start using the music functionality.
+DreamerBot uses [discord-player-youtubei](https://www.npmjs.com/package/discord-player-youtubei) as the default implementation of the musical part of the bot. Please read [the legal notice](https://github.com/retrouser955/discord-player-youtubei/blob/HEAD/LEGAL.md) from the **discord-player-youtubei** developers before you start using the music functionality.
 
 ## How to add a command?
 In order to add your own command, go to [``/src/commands``](https://github.com/Maslinin/DreamerBot/tree/master/src/commands). Here are the basic commands and tools for uploading them to Discord.

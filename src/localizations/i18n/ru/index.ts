@@ -68,7 +68,7 @@ const ru = {
                 }
             },
             when: {
-                trackSearchFailed: ':x: Не найдено результатов по запросу {query:string}.'
+                noTrackSearchResult: ':x: Не найдено результатов по запросу \'{query:string}.\''
             }
         },
         skip: {
@@ -138,9 +138,9 @@ const ru = {
             trackSkipped: 'Track skipped',
             playbackFinished: 'Воспроизведение завершено',
             queueIsEmptyTitle: 'Очередь пуста',
-            queueIsEmptyDescription: 'Все песни из очереди были проиграны.',
-            playbackError: 'Во время воспроизведения произошла ошибка. Пожалуйста, повторите попытку позже.',
-            playerError: 'Произошла ошибка плеера. Пожалуйста, повторите попытку позже.',
+            queueIsEmptyDescription: 'Все песни из очереди были воспроизведены.',
+            playbackError: 'Ошибка воспроизведения. Пожалуйста, повторите попытку позже.',
+            playerError: 'Ошибка плеера. Пожалуйста, повторите попытку позже.',
         },
         userJoined: {
             notificationTitle: '{userName:string}, рады видеть тебя на сервере {serverName:string}!',

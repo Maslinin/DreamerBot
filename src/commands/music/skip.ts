@@ -8,7 +8,7 @@ import { Command } from "../command";
 import { getLocalization, generateLocalizations, getDefaultLocalization } from "../../helpers/localizationHelper";
 import { isUserNotInVoiceChannel, getGuildMember, getGuildMemberLocale } from "../../helpers/interactionHelper";
 import { PlayerState } from "../../music/musicPlayer";
-import { DiscordMusicPlayer } from "../../music/discordMusicPlayer";
+import { DiscordPlayer } from "../../music/discordPlayer";
 
 const defaultCommandLocalization = getDefaultLocalization().music.skip;
 
@@ -30,11 +30,10 @@ export default {
             return;
         }
 
-        const musicPlayer = interaction.client.musicPlayer as DiscordMusicPlayer;
+        const musicPlayer = interaction.client.musicPlayer as DiscordPlayer;
 
-
-        const result = await musicPlayer.skip(interaction);
-        switch(result) {
+        const state = await musicPlayer.skip(interaction);
+        switch(state) {
             case PlayerState.PlayingInAnotherChannel:
                 await interaction.followUp({
                     content: musicLocalization.when.userIsNotInSameVoiceChannelAsBot(),
