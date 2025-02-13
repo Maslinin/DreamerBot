@@ -1,9 +1,9 @@
 name: Scan
 on:
   push:
-    branches: [ "beta" ]
+    branches: [ "master" ]
     pull_request:
-      branches: [ "beta" ]
+      branches: [ "master" ]
 jobs:
   sonarqube:
     name: SonarQube
