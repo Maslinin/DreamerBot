@@ -9,7 +9,7 @@
     "typesafe-i18n": "typesafe-i18n"
   },
   "engines": {
-    "node": ">=18.20.5 <20.0.0"
+    "node": ">=20.18.3 <22.0.0"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
     "typesafe-i18n": "~5.26.2"
   },
   "devDependencies": {
-    "bun": "^1.2.1"
+    "bun": "^1.2.2"
   },
   "trustedDependencies": [
     "bun",
