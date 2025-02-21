@@ -5,11 +5,14 @@ import { getServerInfoFooter } from "../../helpers/formatHelper";
 import { getLocalization } from "../../helpers/localizationHelper";
 import { IDiscordPlayerGuildQueueErrorHandler } from "../types/discordPlayerEventTypes";
 import { getChannelByQueueMetadata, getLocaleByQueueMetadata } from "../../helpers/discordPlayerHelper";
+import logger from "../../loggers/log4jsLogger";
 
 export const errorEventHandlers: IDiscordPlayerGuildQueueErrorHandler[] = [
     {
         event: GuildQueueEvent.PlayerError,
         handler: async (queue, error) => {
+            logger.error(error);
+
             const channel = getChannelByQueueMetadata(queue);
             const eventLocalization = getLocalization(getLocaleByQueueMetadata(queue)).events.music;
         
@@ -25,6 +28,8 @@ export const errorEventHandlers: IDiscordPlayerGuildQueueErrorHandler[] = [
     {
         event: GuildQueueEvent.Error,
         handler: async (queue, error: Error) => {
+            logger.error(error);
+
             const channel = getChannelByQueueMetadata(queue);
             const eventLocalization = getLocalization(getLocaleByQueueMetadata(queue)).events.music;
     
