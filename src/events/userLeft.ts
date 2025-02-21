@@ -1,17 +1,18 @@
 import { BaseGuildTextChannel, Client, EmbedBuilder, Events } from "discord.js";
 import { getLocalization } from "../helpers/localizationHelper";
 import { getServerInfoFooter } from "../helpers/formatHelper";
+import logger from "../loggers/log4jsLogger";
 
 export default (client: Client): void => {
     client.on(Events.GuildMemberRemove, async mbr => {
         const channelId = client.config.channels?.userLeft;
         if (!channelId) {
-            console.warn('The Channel\'s Id is empty. Please fill the config.');
+            logger.warn('The Channel\'s Id is empty. Please fill the config.');
             return;
         }
 
         if (mbr.user.bot) {
-            console.info(`The member ${mbr.user.tag} is a bot, ignoring.`);
+            logger.info('The member %s is a bot, ignoring.', mbr.user.tag);
             return;
         }
 

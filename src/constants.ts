@@ -1,7 +1,8 @@
 import { ColorResolvable } from "discord.js";
 
 export const Path = {
-    config: './src/config/config.json',
+    appConfig: './src/config/config.json',
+    log4jsConfig: './src/loggers/log4js.config.json',
     commands: './src/commands'
 };
 

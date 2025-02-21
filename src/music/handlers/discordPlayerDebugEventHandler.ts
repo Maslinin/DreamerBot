@@ -1,12 +1,13 @@
 import { GuildQueue, GuildQueueEvent, PlayerEvent } from "discord-player";
 import { IDiscordPlayerDebugHandler, IDiscordPlayerGuildQueueDebugHandler } from "../types/discordPlayerEventTypes";
 import { IQueueMetadata } from "../types/discordPlayerMetadataTypes";
+import logger from "../../loggers/log4jsLogger";
 
 export const debugEventHandlers: IDiscordPlayerDebugHandler[] = [
     {
         event: PlayerEvent.Debug,
         handler: async (message: string) => {
-            console.log(`[PLAYER DEBUG] General player debug event: ${message}`);
+            logger.debug('[PLAYER DEBUG] General player debug event: %s', message);
         },
     }
 ];
@@ -15,7 +16,7 @@ export const debugQueueEventHandlers: IDiscordPlayerGuildQueueDebugHandler[] = [
     {
         event: GuildQueueEvent.Debug,
         handler: async (queue: GuildQueue<IQueueMetadata>, message: string) => {
-            console.log(`[QUEUE DEBUG] Player queue debug event: ${message}`);
+            logger.debug('[QUEUE DEBUG] Player queue debug event: %s', message);
         },
     }
 ];

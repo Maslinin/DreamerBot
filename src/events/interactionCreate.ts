@@ -1,6 +1,7 @@
 import { Interaction, Client, Events, MessageFlags } from "discord.js";
 import { getLocalization } from "../helpers/localizationHelper";
 import { getGuildMemberLocale } from "../helpers/interactionHelper";
+import logger from "../loggers/log4jsLogger";
 
 export default (client: Client): void => {
     client.on(Events.InteractionCreate, async (interaction: Interaction) => {
@@ -28,7 +29,7 @@ export default (client: Client): void => {
 
             await command.execute(interaction);
         } catch (err) {
-            console.error(err);
+            logger.error(err);
 
             const locale = getLocalization(getGuildMemberLocale(interaction));
             await interaction.followUp(locale.events.interactionCreate.unknownError());
@@ -50,7 +51,7 @@ export default (client: Client): void => {
 
             await command.autocomplete(interaction);
         } catch (err) {
-            console.error(err);
+            logger.error(err);
         }
     };
 };

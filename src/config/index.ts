@@ -33,7 +33,7 @@ export default class AppConfig {
     }
 
     public static async get(): Promise<AppConfig> {
-        const absolutePath = path.resolve(Path.config);
+        const absolutePath = path.resolve(Path.appConfig);
         const fileContent = await fs.promises.readFile(absolutePath, 'utf-8');
         return JSON.parse(fileContent) as AppConfig;
     }
