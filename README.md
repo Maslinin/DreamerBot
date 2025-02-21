@@ -16,7 +16,7 @@ This project was created to provide a reliable platform for creating your own Di
 - Adapted for bun - one of the fastest Node.js runtimes.
 
 ### Requirements
-- Node.js v18.20.*
+- Node.js v20.18.*
 - Bun Runtime
 - Ffmpeg
 
