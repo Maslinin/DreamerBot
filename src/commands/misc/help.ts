@@ -28,10 +28,10 @@ export default {
     async execute(interaction: ChatInputCommandInteraction) {
         const localization = getLocalization(getGuildMemberLocale(interaction));
         const commandLocalization = localization.misc.help;
+
         const categoryRecords = await getCommandCategoriesByPermissions(getMemberPermissions(interaction));
 
         const categoryRecordKeys = Object.keys(categoryRecords);
-
         if (categoryRecordKeys.length === 0) {
             interaction.followUp({
                 content: commandLocalization.when.noAvailableCommands(),
@@ -83,12 +83,16 @@ export default {
             collector.stop();
         });
 
-        collector?.on('end', () => {
-            if (!interaction.replied) {
-                interaction.editReply({
-                    content: commandLocalization.when.timeout(),
-                    components: []
-                });
+        collector?.on('end', (collected, reason) => {
+            if (reason === 'time') {
+                if (!interaction.replied) {
+                    interaction.editReply({
+                        content: commandLocalization.when.timeout(),
+                        components: []
+                    });
+                }
+            } else {
+                interaction.deleteReply();
             }
         });
     }
