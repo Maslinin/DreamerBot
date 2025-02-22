@@ -13,6 +13,7 @@ This project was created to provide a reliable platform for creating your own Di
 - Easily create your own commands;
 - Multi-language support thanks to [typesafe-i18n](https://www.npmjs.com/package/typesafe-i18n);
 - Built-in music playback capabilities thanks to [discord-player](https://www.npmjs.com/package/discord-player) and [discord-player-youtubei](https://www.npmjs.com/package/discord-player-youtubei);
+- Detailed logging with the ability to deeply configure logs thanks to [log4js](https://www.npmjs.com/package/log4js).
 - Adapted for bun - one of the fastest Node.js runtimes.
 
 ### Requirements
@@ -31,7 +32,7 @@ The commands are divided into categories, and each category has its own director
 You can refer to the [official discord.js documentation](https://discordjs.guide/creating-your-bot/slash-commands.html) or to [one of the existing DreamerBot commands](https://github.com/Maslinin/DreamerBot/blob/master/src/commands/games/roll.ts) to create your own command. 
 
 You can use both **JavaScript** or **TypeScript** to create a command.       
-After you create your command file and start the bot, the DreamerBot's command register will create/update your commands in Discord interface.
+After you create your command file and start the bot, the DreamerBot's command register will create, update or remove your commands in Discord interface.
 
 > You may need to restart the Discord client on your device after adding a command or changing its interface.
 
