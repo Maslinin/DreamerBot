@@ -19,14 +19,14 @@
   "license": "MIT",
   "dependencies": {
     "discord-player": "^7.1.0",
-    "discord-player-youtubei": "^1.4.2",
+    "discord-player-youtubei": "^1.4.3",
     "discord.js": "~14.17.3",
     "log4js": "^6.9.1",
     "mediaplex": "^1.0.0",
     "typesafe-i18n": "~5.26.2"
   },
   "devDependencies": {
-    "bun": "^1.2.2"
+    "bun": "^1.2.7"
   },
   "trustedDependencies": [
     "bun",
