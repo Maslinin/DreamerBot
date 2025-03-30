@@ -172,7 +172,7 @@ export abstract class DiscordPlayer implements IMusicPlayer<Track, GuildQueue<IQ
 
     public getCurrentTrack(guildId: string): Partial<Track> | null {
         const queue = this.getCurrentQueue(guildId);
-        if (!queue || !queue.isPlaying()) return null;
+        if (!queue?.isPlaying()) return null;
         return this.mapTrackToPartial(queue.currentTrack!);
     }
 

@@ -42,7 +42,7 @@ export function getCurrentVoiceChannel(interaction: Interaction): VoiceBasedChan
 }
 
 export function isUserNotInVoiceChannel(member: GuildMember): boolean {
-    return !!!member?.voice?.channel;
+    return !member?.voice?.channel;
 }
 
 export function isUserNotInSameVoiceChannelAsBot(member: GuildMember, bot: GuildMember): boolean {

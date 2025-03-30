@@ -131,7 +131,7 @@ async function sendRepeatStateEmbed(
     };
 
     const embed = createTrackEmbed(
-        stateToTitleMap[state]?.() || "Unknown State",
+        stateToTitleMap[state]?.() ?? "Unknown State",
         getGuild(interaction)
     );
 
