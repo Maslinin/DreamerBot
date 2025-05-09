@@ -9,7 +9,7 @@
     "typesafe-i18n": "typesafe-i18n"
   },
   "engines": {
-    "node": ">=20.18.3 <22.0.0"
+    "node": ">=22.15.0 <23.0.0"
   },
   "repository": {
     "type": "git",
@@ -19,14 +19,14 @@
   "license": "MIT",
   "dependencies": {
     "discord-player": "^7.1.0",
-    "discord-player-youtubei": "^1.4.3",
+    "discord-player-youtubei": "^1.4.6",
     "discord.js": "~14.17.3",
     "log4js": "^6.9.1",
     "mediaplex": "^1.0.0",
     "typesafe-i18n": "~5.26.2"
   },
   "devDependencies": {
-    "bun": "^1.2.7"
+    "bun": "^1.2.12"
   },
   "trustedDependencies": [
     "bun",
