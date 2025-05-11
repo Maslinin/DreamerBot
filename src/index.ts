@@ -22,7 +22,7 @@ try {
         ]
     });
 
-    const musicPlayer = await (new YouTubeiPlayer(client))
+    const musicPlayer = await (new YouTubeiPlayer(client, config.player!))
         .loadExtractors();
 
     client

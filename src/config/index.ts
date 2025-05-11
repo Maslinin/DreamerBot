@@ -7,6 +7,7 @@ export default class AppConfig {
     private _auth?: IAuthConfig;
     private _register?: IRegisterConfig;
     private _channels?: IChannelConfig;
+    private _player?: IMusicPlayerConfig;
 
     public get auth(): IAuthConfig | undefined {
         return this._auth;
@@ -32,6 +33,14 @@ export default class AppConfig {
         this._channels = config;
     }
 
+    public get player(): IMusicPlayerConfig | undefined {
+        return this._player;
+    }
+
+    public set player(config: IMusicPlayerConfig | undefined) {
+        this._player = config;
+    }
+
     public static async get(): Promise<AppConfig> {
         const absolutePath = path.resolve(Path.appConfig);
         const fileContent = await fs.promises.readFile(absolutePath, 'utf-8');
@@ -39,15 +48,19 @@ export default class AppConfig {
     }
 }
 
-interface IAuthConfig {
+export interface IAuthConfig {
     botToken: string;
 }
 
-interface IRegisterConfig {
+export interface IRegisterConfig {
     clientId: Snowflake;
 }
 
-interface IChannelConfig {
+export interface IChannelConfig {
     userJoined: string;
     userLeft: string;
+}
+
+export interface IMusicPlayerConfig {
+    cookies: string;
 }
