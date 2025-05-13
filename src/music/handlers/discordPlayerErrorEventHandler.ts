@@ -5,7 +5,7 @@ import { getServerInfoFooter } from "../../helpers/formatHelper";
 import { getLocalization } from "../../helpers/localizationHelper";
 import { IDiscordPlayerGuildQueueErrorHandler } from "../types/discordPlayerEventTypes";
 import { getChannelByQueueMetadata, getLocaleByQueueMetadata } from "../../helpers/discordPlayerHelper";
-import logger from "../../loggers/log4jsLogger";
+import { logger } from "../../loggers";
 
 export const errorEventHandlers: IDiscordPlayerGuildQueueErrorHandler[] = [
     {

@@ -1,7 +1,7 @@
 import { BaseGuildTextChannel, Client, EmbedBuilder, Events } from "discord.js";
 import { getLocalization } from "../helpers/localizationHelper";
 import { getServerInfoFooter } from "../helpers/formatHelper";
-import logger from "../loggers/log4jsLogger";
+import { logger } from "../loggers";
 
 export default (client: Client): void => {
     client.on(Events.GuildMemberRemove, async mbr => {

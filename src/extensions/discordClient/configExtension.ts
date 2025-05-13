@@ -1,5 +1,5 @@
 import { Client } from "discord.js";
-import AppConfig from "../../config";
+import { AppConfig } from "../../config";
 
 declare module "discord.js" {
     interface Client {

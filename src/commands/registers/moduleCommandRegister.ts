@@ -1,6 +1,6 @@
 import { Collection, REST, Routes, Snowflake } from 'discord.js';
 import ICommandRegister from "./commandRegister";
-import AppConfig from '../../config';
+import { IAuthConfig, IRegisterConfig } from '../../config';
 import { Command, isCommand } from '../command';
 import { Path } from "../../constants";
 import { getModules } from '../../helpers/fsHelper';
@@ -9,13 +9,13 @@ export default class ModuleCommandRegister implements ICommandRegister {
     private readonly _rest: REST;
     private readonly _clientId: Snowflake;
 
-    constructor(config: AppConfig) {
-        if (!config.auth?.botToken || !config.register?.clientId) {
+    constructor(authConfig: IAuthConfig, registerConfig: IRegisterConfig) {
+        if (!authConfig.botToken || !registerConfig.clientId) {
             throw new Error("Missing required configuration for command registration.");
         }
 
-        this._rest = new REST().setToken(config.auth.botToken);
-        this._clientId = config.register.clientId;
+        this._rest = new REST().setToken(authConfig.botToken);
+        this._clientId = registerConfig.clientId;
     }
 
     public async Register(): Promise<Collection<string, Command>> {

@@ -1,15 +1,15 @@
 import { Client, GatewayIntentBits } from "discord.js";
-import AppConfig from "./config";
 import ModuleCommandRegister from "./commands/registers/moduleCommandRegister";
 import YouTubeiPlayer from "./music/youTubeiDiscordPlayer";
-import logger from "./loggers/log4jsLogger";
+import { AppConfig } from "./config";
+import { logger } from "./loggers";
 import "./events";
 import "./extensions/discordClient"
 
 try {
     const config = await AppConfig.get();
 
-    const commandRegister = new ModuleCommandRegister(config);
+    const commandRegister = new ModuleCommandRegister(config.auth!, config.register!);
     const commands = await commandRegister.Register();
 
     const client = new Client({
