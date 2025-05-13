@@ -33,6 +33,8 @@ export default {
         const commandLocalization = getLocalization(getGuildMemberLocale(interaction)).management.delete;
 		const amount = interaction.options.getInteger(commandLocalization.options.amount.name(), true);
 
+        await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+
         const channel = getBaseGuildTextChannel(interaction);
         let remaining = amount;
         while (remaining > 0) {

@@ -29,6 +29,8 @@ export default {
         const localization = getLocalization(getGuildMemberLocale(interaction));
         const commandLocalization = localization.misc.help;
 
+        await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+
         const categoryRecords = await getCommandCategoriesByPermissions(getMemberPermissions(interaction));
 
         const categoryRecordKeys = Object.keys(categoryRecords);

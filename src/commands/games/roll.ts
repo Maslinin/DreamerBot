@@ -44,6 +44,8 @@ export default {
 		const min = interaction.options.getInteger(commandLocalization.options.min.name(), true);
         const max = interaction.options.getInteger(commandLocalization.options.max.name(), true);
 
+        await interaction.deferReply();
+
         if (min === max) {
             await interaction.followUp({
                 content: commandLocalization.when.minValueIsEqualToMax(),

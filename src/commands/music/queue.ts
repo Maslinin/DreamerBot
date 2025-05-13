@@ -31,6 +31,8 @@ export default {
     async execute(interaction: ChatInputCommandInteraction) {
         const musicLocalization = getLocalization(getGuildMemberLocale(interaction)).music;
 
+        await interaction.deferReply();
+
         const member = getGuildMember(interaction);
         if (isUserNotInVoiceChannel(member)) {
             await interaction.followUp({ 

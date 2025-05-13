@@ -46,6 +46,8 @@ export default {
         const musicLocalization = getLocalization(getGuildMemberLocale(interaction)).music;
         const commandLocalization = musicLocalization.repeat;
 
+        await interaction.deferReply();
+
         const member = getGuildMember(interaction);
         if (isUserNotInVoiceChannel(member)) {
             await interaction.followUp({ 

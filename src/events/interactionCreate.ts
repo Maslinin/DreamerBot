@@ -15,8 +15,6 @@ export default (client: Client): void => {
     const handleChatInputCommand = async (interaction: Interaction) => {
         if (!interaction.isChatInputCommand()) return;
 
-        await interaction.deferReply({ flags: MessageFlags.Ephemeral });
-
         try {
             const command = client.commands.get(interaction.commandName);
             if (!command) {
