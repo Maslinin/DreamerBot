@@ -60,7 +60,7 @@ export abstract class DiscordPlayer implements IMusicPlayer<Track, GuildQueue<IQ
             return PlayerState.PlayingInAnotherChannel;
         }
         
-        queue.addTrack(track?.playlist || track);
+        queue.addTrack(track?.playlist ?? track);
 
         if (!queue.isPlaying()) await queue.node.play();
 

@@ -1,4 +1,4 @@
-import { Interaction, Client, Events, MessageFlags } from "discord.js";
+import { Interaction, Client, Events } from "discord.js";
 import { getLocalization } from "../helpers/localizationHelper";
 import { getGuildMemberLocale } from "../helpers/interactionHelper";
 import { logger } from "../loggers";

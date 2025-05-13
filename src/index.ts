@@ -37,7 +37,6 @@ try {
         .handleInteractionCreate()
 
     await client.login(config.auth?.botToken);
-}
-catch(err) {
+} catch(err) {
     logger.error(err);
 }
