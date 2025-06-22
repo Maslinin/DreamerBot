@@ -4,7 +4,7 @@
 A powerful Discord Bot. Music, management and more.
 
 ## Overview
-This project was created to provide a reliable platform for creating your own Discord bot. You can use it as the basis for your bot for non-commercial use. If you decide to use this repository as the basis for your bot, please put a star on this repository or fork it - it will help promote it and will be the best gratitude for me.
+This project was created to provide a reliable platform for creating your own Discord bot. You are free to use, modify, and extend it under the terms of the MIT license. If you decide to use this repository as the basis for your bot, please put a star on this repository or fork it - it will help promote it and will be the best gratitude for me.
 
 > Please note that DreamerBot does not exist as a real Discord bot. Any Discord bot with a similar name is not related to this repository.
 
@@ -17,12 +17,9 @@ This project was created to provide a reliable platform for creating your own Di
 - Adapted for bun - one of the fastest Node.js runtimes.
 
 ### Requirements
-- Node.js v20.18.*
+- Node.js v22.15.* or higher
 - Bun Runtime
 - Ffmpeg
-
-### Legal Notice
-DreamerBot uses [discord-player-youtubei](https://www.npmjs.com/package/discord-player-youtubei) as the default implementation of the musical part of the bot. Please read [the legal notice](https://github.com/retrouser955/discord-player-youtubei/blob/HEAD/LEGAL.md) from the **discord-player-youtubei** developers before you start using the music functionality.
 
 ## How to add a command?
 In order to add your own command, go to [``/src/commands``](https://github.com/Maslinin/DreamerBot/tree/master/src/commands). Here are the basic commands and tools for uploading them to Discord.
@@ -50,3 +47,14 @@ After you add a new localization or change an existing one, you will only need t
 npx typesafe-i18n
 ```
 It will generate new localization files for the bot.
+
+## 🛡 License
+
+This project is licensed under the [MIT License](./LICENSE).  
+You are free to use, modify, distribute, and build upon this project for any purpose, including commercial use, in accordance with the license terms.
+
+### Legal Notice
+
+DreamerBot uses [discord-player-youtubei](https://www.npmjs.com/package/discord-player-youtubei) as the default implementation for music playback.  
+Please review [the legal notice](https://github.com/retrouser955/discord-player-youtubei/blob/HEAD/LEGAL.md) provided by the **discord-player-youtubei** maintainers before using the music functionality. 
+Usage of this feature may violate the Terms of Service of platforms like YouTube, VK, or other third-party services — proceed at your own risk.
